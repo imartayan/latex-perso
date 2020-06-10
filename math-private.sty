@@ -1,0 +1,153 @@
+% math-private - Igor Martayan
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{math-private}
+
+% Packages
+\RequirePackage{siunitx, stmaryrd}
+
+\everymath{\displaystyle}
+
+\RequirePackage{amssymb, amsthm, mathtools}
+\theoremstyle{definition}
+\newtheorem{defi}{Définition}
+\newtheorem*{defi*}{Définition}
+\newtheorem{thm}{Théorème}
+\newtheorem*{thm*}{Théorème}
+\newtheorem{prop}[thm]{Propriété}
+\newtheorem*{prop*}{Propriété}
+\newtheorem{lem}[thm]{Lemme}
+\newtheorem*{lem*}{Lemme}
+\newtheorem{cor}[thm]{Corollaire}
+\newtheorem*{cor*}{Corollaire}
+\newtheorem*{dem}{Démonstration}
+\newtheorem{exo}{Exercice}
+\newtheorem*{exo*}{Exercice}
+\newtheorem{pb}{Problème}
+\newtheorem*{pb*}{Problème}
+\newtheorem{qu}{Question}
+\newtheorem*{sol}{Solution}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remarque}
+\newtheorem*{exem}{Exemple}
+
+% Commands
+\newcommand{\op}{\operatorname}
+\newcommand{\txt}[1]{\text{ #1 }}
+
+%% Quantificateurs
+\newcommand{\pt}{\forall}
+\newcommand{\ex}{\exists}
+\newcommand{\n}{\not}
+\newcommand{\app}{\in}
+\newcommand{\inc}{\subset}
+\newcommand{\etc}{\ldots}
+\newcommand{\oo}{\infty}
+\newcommand{\ssi}{\Longleftrightarrow}
+\newcommand{\imp}{\Longrightarrow}
+\newcommand{\eg}{\op*{=}}
+\newcommand{\ie}{\op*{\leqslant}}
+\newcommand{\se}{\op*{\geqslant}}
+\newcommand{\eq}{\op*{\sim}}
+\newcommand{\co}{\equiv}
+\newcommand{\env}{\approx}
+
+%% Délimiteurs
+\newcommand{\pg}{\left(}
+\newcommand{\pd}{\right)}
+\newcommand{\cg}{\left[}
+\newcommand{\cd}{\right]}
+\newcommand{\chg}{\left\langle}
+\newcommand{\chd}{\right\rangle}
+\newcommand{\ag}{\left\lbrace}
+\newcommand{\ad}{\right\rbrace}
+\newcommand{\ens}[1]{\ag #1 \ad}
+\renewcommand{\iff}[1]{\cg #1 \cd}
+\newcommand{\ioo}[1]{\left] #1 \right[}
+\newcommand{\ifo}[1]{\left[ #1 \right[}
+\newcommand{\iof}[1]{\left] #1 \right]}
+\newcommand{\ien}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\mo}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\nm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ped}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\pee}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\sys}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\sous}[2]{\underbrace{#1}_{#2}}
+\newcommand{\mat}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\matd}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\newcommand{\coord}[1]{\left\lvert \begin{array}{l} #1 \end{array} \right.}
+
+%% Lettres
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cx}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\Co}{\mathcal{C}}
+\newcommand{\De}{\mathcal{D}}
+\newcommand{\Li}{\mathcal{L}}
+\newcommand{\Pa}{\mathcal{P}}
+\newcommand{\Rel}{\mathcal{R}}
+\newcommand{\Sol}{\mathcal{S}}
+\newcommand{\M}{\mathcal{M}}
+
+%% Fonctions
+\newcommand{\dans}{\longrightarrow}
+\newcommand{\asso}{\longmapsto}
+\newcommand{\asin}{\arcsin}
+\newcommand{\acos}{\arccos}
+\newcommand{\atan}{\arctan}
+\newcommand{\sh}{\op{sh}}
+\newcommand{\ch}{\op{ch}}
+\newcommand{\thy}{\op{th}}
+\newcommand{\ash}{\op{argsh}}
+\newcommand{\ach}{\op{argch}}
+\newcommand{\ath}{\op{argth}}
+\newcommand{\id}{\op{id}}
+\newcommand{\cl}{\op{cl}}
+\renewcommand{\Re}{\op{Re}}
+\renewcommand{\Im}{\op{Im}}
+\newcommand{\Vect}{\op{Vect}}
+\newcommand{\Isom}{\op{Isom}}
+\newcommand{\rg}{\op{rg}}
+\newcommand{\tr}{\op{tr}}
+\newcommand{\val}{\op{val}}
+\newcommand{\Sp}{\op{Sp}}
+
+%% Symboles
+\newcommand{\vide}{\varnothing}
+\newcommand{\fd}{\rightarrow}
+\newcommand{\fg}{\leftarrow}
+\newcommand{\lfd}{\longrightarrow}
+\newcommand{\lfg}{\longleftarrow}
+\newcommand{\tend}{\op*{\lfd}}
+\newcommand{\x}{\times}
+\newcommand{\f}{\frac}
+\newcommand{\de}{\,\mathrm{d}}
+\newcommand{\dep}{\partial}
+\newcommand{\union}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\priv}{\setminus}
+\newcommand{\Un}{\bigcup}
+\newcommand{\Und}{\bigsqcup}
+\newcommand{\In}{\bigcap}
+\newcommand{\rond}{\circ}
+\newcommand{\ve}{\overrightarrow}
+\newcommand{\scal}{\cdot}
+\newcommand{\vect}{\wedge}
+\newcommand{\barre}{\overline}
+\newcommand{\pgcd}{\wedge}
+\newcommand{\ppcm}{\vee}
+\newcommand{\non}{\neg}
+\newcommand{\et}{\wedge}
+\newcommand{\ou}{\vee}
+
+%% Autres
+\newcommand{\croiss}{\nearrow\,}
+\newcommand{\scroiss}{\nearrow\!\!\nearrow\,}
+\newcommand{\decroiss}{\searrow\,}
+\newcommand{\sdecroiss}{\searrow\!\!\searrow\,}
+
+\endinput
