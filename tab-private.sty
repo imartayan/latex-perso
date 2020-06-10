@@ -1,0 +1,30 @@
+% tab-private - Igor Martayan
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tab-private}
+
+% Packages
+\RequirePackage{booktabs, colortbl, float, tabularx}
+
+% Commands
+\newenvironment{Tab}[1][H]{\begin{table}[#1]\centering}{\end{table}}
+
+\newcommand{\hl}{\hline}
+\newcommand{\mc}{\multicolumn}
+\newcommand{\cc}{\cellcolor}
+
+\newenvironment{TabX}[2][]{\tabularx{#1\columnwidth}{#2}}{\endtabularx}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+% Credits to David Carlisle (https://tex.stackexchange.com/questions/147088)
+\newenvironment{BTab}[2][]{
+	\let\savedtx\TX@endtabularx
+	\def\TX@endtabularx{\toks@\expandafter{\the\toks@\\\bottomrule}\savedtx}
+	\tabularx{#1\columnwidth}{#2}\toprule
+}{\endtabularx}
+
+\renewcommand{\|}{\\\midrule}
+
+\endinput
