@@ -1,0 +1,111 @@
+% font-private - Igor Martayan
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{font-private}
+
+% Packages
+\@ifpackageloaded{fontspec}{
+	% If fontspec is loaded, don't load mathspec.
+}{
+	\RequirePackage{mathspec}
+}
+\defaultfontfeatures{Ligatures=TeX, Numbers={Lining, Proportional}}
+
+% Commands
+\newcommand{\configfont}[5][\setmainfont]{
+	#1{#2}[
+		UprightFont = #2#3,
+		ItalicFont = #2#3 Italic,
+		BoldFont = #2#4,
+		BoldItalicFont = #2#4 Italic,
+		Scale = #5
+	]
+}
+
+\newcommand{\configfontit}[6][\setmainfont]{
+	#1{#2}[
+		UprightFont = #2#3,
+		ItalicFont = #2#3#5,
+		BoldFont = #2#4,
+		BoldItalicFont = #2#4#5,
+		Scale = #6
+	]
+}
+
+\newcommand{\configfontsc}[6][\setmainfont]{
+	#1{#2}[
+		UprightFont = #2#3,
+		ItalicFont = #2#3 Italic,
+		BoldFont = #2#4,
+		BoldItalicFont = #2#4 Italic,
+		UprightFeatures = {SmallCapsFont = #2#5#3},
+		ItalicFeatures = {SmallCapsFont = #2#5#3 Italic},
+		BoldFeatures = {SmallCapsFont = #2#5#4},
+		BoldItalicFeatures = {SmallCapsFont = #2#5#4 Italic},
+		Scale = #6
+	]
+}
+
+% Options
+\DeclareOption{alegreya}{
+	\configfontsc[\setmainfont]{Alegreya}{}{ Medium}{ SC}{1}
+	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
+}
+\DeclareOption{alegreya-sans}{
+	\configfontsc[\setmainfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
+	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
+}
+\DeclareOption{anonymous}{
+	\configfont[\setmonofont]{Anonymous Pro}{}{ Bold}{1}
+}
+\DeclareOption{charis}{
+	\configfont[\setmainfont]{Charis SIL}{}{ Bold}{1}
+}
+\DeclareOption{fira-sans}{
+	\configfont[\setmainfont]{Fira Sans}{}{ Medium}{0.85}
+	\configfont[\setsansfont]{Fira Sans}{}{ Medium}{0.85}
+	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
+}
+\DeclareOption{fira-sans-light}{
+	\configfont[\setmainfont]{Fira Sans}{ Light}{}{0.85}
+	\configfont[\setsansfont]{Fira Sans}{ Light}{}{0.85}
+	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
+}
+\DeclareOption{fira-mono}{
+	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
+}
+\DeclareOption{inconsolata}{
+	\configfontit[\setmonofont]{Inconsolata}{}{}{}{1}
+}
+\DeclareOption{inria-serif}{
+	\configfont[\setmainfont]{Inria Serif}{}{ Bold}{1}
+	\configfont[\setsansfont]{Inria Sans}{}{ Bold}{1}
+}
+\DeclareOption{inria-sans}{
+	\configfont[\setmainfont]{Inria Sans}{}{ Bold}{1}
+	\configfont[\setsansfont]{Inria Sans}{}{ Bold}{1}
+}
+\DeclareOption{source-serif}{
+	\configfont[\setmainfont]{Source Serif Pro}{}{ Semibold}{1}
+	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{1}
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+}
+\DeclareOption{source-sans}{
+	\configfont[\setmainfont]{Source Sans Pro}{}{ Semibold}{1}
+	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{1}
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+}
+\DeclareOption{source-code}{
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+}
+
+% CJK
+\DeclareOption{ipaex}{
+	\newfontfamily\rmjap{IPAexMincho}
+	\newfontfamily\sfjap{IPAexGothic}
+}
+
+\ExecuteOptions{alegreya-sans, inconsolata, ipaex}
+% pour respecter l'ordre des options
+\ProcessOptions*\relax
+
+\endinput
