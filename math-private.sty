@@ -4,10 +4,16 @@
 
 % Packages
 \RequirePackage{siunitx, stmaryrd}
+\RequirePackage{amssymb, amsthm}
+\@ifpackageloaded{mathspec}{
+	% If mathspec is loaded, don't load mathtools.
+}
+{
+	\RequirePackage{mathtools}
+}
 
 \everymath{\displaystyle}
 
-\RequirePackage{amssymb, amsthm, mathtools}
 \theoremstyle{definition}
 \newtheorem{defi}{Définition}
 \newtheorem*{defi*}{Définition}
