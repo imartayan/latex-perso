@@ -2,159 +2,247 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{math-private}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareOption{display}{\everymath{\displaystyle}}
+
+\newif\if@french \@frenchfalse
+\DeclareOption{fr}{\@frenchtrue}
+
+\newif\if@thm \@thmtrue
+\DeclareOption{thm}{\@thmtrue}
+\DeclareOption{nothm}{\@thmfalse}
+
+\newif\if@algebra \@algebratrue
+\DeclareOption{algebra}{\@algebratrue}
+\DeclareOption{noalgebra}{\@algebrafalse}
+
+\newif\if@calculus \@calculustrue
+\DeclareOption{calculus}{\@calculustrue}
+\DeclareOption{nocalculus}{\@calculusfalse}
+
+\DeclareOption{minimal}{
+    \@thmfalse
+    \@algebrafalse
+    \@calculusfalse
+}
+
+\ProcessOptions*\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
-\RequirePackage{siunitx, stmaryrd}
-\RequirePackage{amssymb, amsthm}
-\@ifpackageloaded{mathspec}{
-	% If mathspec is loaded, don't load mathtools.
-}
-{
-	\RequirePackage{mathtools}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\everymath{\displaystyle}
+\@ifpackageloaded{mathspec}{}{\RequirePackage{mathtools}} % if mathspec is loaded, don't load mathtools
+\RequirePackage{amsmath, amssymb}
+\RequirePackage{stmaryrd} % for llbracket and rrbracket
 
-\theoremstyle{definition}
-\newtheorem{defi}{Définition}
-\newtheorem*{defi*}{Définition}
-\newtheorem{thm}{Théorème}
-\newtheorem*{thm*}{Théorème}
-\newtheorem{prop}[thm]{Propriété}
-\newtheorem*{prop*}{Propriété}
-\newtheorem{lem}[thm]{Lemme}
-\newtheorem*{lem*}{Lemme}
-\newtheorem{crl}[thm]{Corollaire}
-\newtheorem*{crl*}{Corollaire}
-\newtheorem*{dem}{Démonstration}
-\newtheorem{qu}{Question}
-\newtheorem{exo}{Exercice}
-\newtheorem*{exo*}{Exercice}
-\newtheorem{pb}{Problème}
-\newtheorem*{pb*}{Problème}
-\newtheorem*{sol}{Solution}
-\newtheorem*{cor}{Correction}
-\theoremstyle{remark}
-\newtheorem*{rem}{Remarque}
-\newtheorem*{exm}{Exemple}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Delimiters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Commands
-\newcommand{\op}{\operatorname}
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lb}{\left[}
+\newcommand{\rb}{\right]}
+\newcommand{\lcb}{\left\lbrace}
+\newcommand{\rcb}{\right\rbrace}
+\newcommand{\lch}{\left\langle}
+\newcommand{\rch}{\right\rangle}
+\newcommand{\set}[1]{\lcb #1 \rcb}
+\newcommand{\icc}[1]{\lb #1 \rb}
+\newcommand{\ioo}[1]{\left] #1 \right[}
+\newcommand{\ico}[1]{\left[ #1 \right[}
+\newcommand{\ioc}[1]{\left] #1 \right]}
+\newcommand{\inat}[1]{\left\llbracket #1 \right\rrbracket}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\scal}[1]{\lch #1 \rch}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\sys}[1]{\begin{cases} #1 \end{cases}}
 \newcommand{\txt}[1]{\text{ #1 }}
 
-%% Quantificateurs
-\newcommand{\pt}{\forall}
-\newcommand{\ex}{\exists}
-\newcommand{\n}{\not}
-\newcommand{\app}{\in}
-\newcommand{\inc}{\subset}
-\newcommand{\etc}{\ldots}
-\newcommand{\oo}{\infty}
-\newcommand{\ssi}{\Longleftrightarrow}
-\newcommand{\imp}{\Longrightarrow}
-\newcommand{\eg}{\op*{=}}
-\newcommand{\ie}{\op*{\leqslant}}
-\newcommand{\se}{\op*{\geqslant}}
-\newcommand{\eq}{\op*{\sim}}
-\newcommand{\co}{\equiv}
-\newcommand{\env}{\approx}
+\if@french
+    \newcommand{\pg}{\lp}
+    \newcommand{\pd}{\rp}
+    \newcommand{\cg}{\lb}
+    \newcommand{\cd}{\rb}
+    \newcommand{\ag}{\lcb}
+    \newcommand{\ad}{\rcb}
+    \newcommand{\chg}{\lch}
+    \newcommand{\chd}{\rch}
+    \newcommand{\ens}{\set}
+    \renewcommand{\iff}{\icc}
+    \newcommand{\ifo}{\ico}
+    \newcommand{\iof}{\ioc}
+    \newcommand{\ien}{\inat}
+    \newcommand{\mo}{\abs}
+    \newcommand{\nm}{\norm}
+    \newcommand{\ped}{\floor}
+    \newcommand{\pee}{\ceil}
+    \newcommand{\sous}[2]{\underbrace{#1}_{#2}}
+\fi
 
-%% Délimiteurs
-\newcommand{\pg}{\left(}
-\newcommand{\pd}{\right)}
-\newcommand{\cg}{\left[}
-\newcommand{\cd}{\right]}
-\newcommand{\chg}{\left\langle}
-\newcommand{\chd}{\right\rangle}
-\newcommand{\ag}{\left\lbrace}
-\newcommand{\ad}{\right\rbrace}
-\newcommand{\ens}[1]{\ag #1 \ad}
-\renewcommand{\iff}[1]{\cg #1 \cd}
-\newcommand{\ioo}[1]{\left] #1 \right[}
-\newcommand{\ifo}[1]{\left[ #1 \right[}
-\newcommand{\iof}[1]{\left] #1 \right]}
-\newcommand{\ien}[1]{\left\llbracket #1 \right\rrbracket}
-\newcommand{\mo}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\nm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\ped}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\pee}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\sys}[1]{\begin{cases} #1 \end{cases}}
-\newcommand{\sous}[2]{\underbrace{#1}_{#2}}
-\newcommand{\mat}[1]{\begin{bmatrix} #1 \end{bmatrix}}
-\newcommand{\matd}[1]{\begin{vmatrix} #1 \end{vmatrix}}
-\newcommand{\coord}[1]{\left\lvert \begin{array}{l} #1 \end{array} \right.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Common notations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Lettres
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
 \newcommand{\Cx}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
 \renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\Va}{\mathbb{V}}
 \newcommand{\Oh}{\mathcal{O}}
-\newcommand{\Co}{\mathcal{C}}
-\newcommand{\De}{\mathcal{D}}
-\newcommand{\Li}{\mathcal{L}}
-\newcommand{\Pa}{\mathcal{P}}
-\newcommand{\Rel}{\mathcal{R}}
-\newcommand{\Sol}{\mathcal{S}}
-\newcommand{\M}{\mathcal{M}}
-
-%% Fonctions
-\newcommand{\dans}{\longrightarrow}
-\newcommand{\asso}{\longmapsto}
-\newcommand{\asin}{\arcsin}
-\newcommand{\acos}{\arccos}
-\newcommand{\atan}{\arctan}
-\newcommand{\sh}{\op{sh}}
-\newcommand{\ch}{\op{ch}}
-\newcommand{\thy}{\op{th}}
-\newcommand{\ash}{\op{argsh}}
-\newcommand{\ach}{\op{argch}}
-\newcommand{\ath}{\op{argth}}
-\newcommand{\id}{\op{id}}
-\newcommand{\cl}{\op{cl}}
+\if@french
+    \newcommand{\Es}{\mathbb{E}}
+    \newcommand{\Pa}{\mathcal{P}}
+    \newcommand{\No}{\mathcal{N}}
+    \newcommand{\I}{\mathcal{I}}
+\fi
+\newcommand{\op}{\operatorname}
 \renewcommand{\Re}{\op{Re}}
 \renewcommand{\Im}{\op{Im}}
-\newcommand{\Vect}{\op{Vect}}
-\newcommand{\Isom}{\op{Isom}}
-\newcommand{\rg}{\op{rg}}
-\newcommand{\tr}{\op{tr}}
-\newcommand{\val}{\op{val}}
-\newcommand{\Sp}{\op{Sp}}
 
-%% Symboles
-\newcommand{\vide}{\varnothing}
-\newcommand{\fd}{\rightarrow}
-\newcommand{\fg}{\leftarrow}
-\newcommand{\lfd}{\longrightarrow}
-\newcommand{\lfg}{\longleftarrow}
-\newcommand{\tend}{\op*{\lfd}}
-\newcommand{\x}{\times}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful shorthands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fa}{\forall}
+\newcommand{\ex}{\exists}
 \newcommand{\f}{\frac}
-\newcommand{\de}{\,\mathrm{d}}
-\newcommand{\dep}{\partial}
-\newcommand{\union}{\cup}
+\newcommand{\x}{\times}
+\newcommand{\oo}{\infty}
+\newcommand{\etc}{\ldots}
+\newcommand{\void}{\varnothing}
+\newcommand{\inc}{\subset}
 \newcommand{\inter}{\cap}
-\newcommand{\priv}{\setminus}
-\newcommand{\Un}{\bigcup}
-\newcommand{\Und}{\bigsqcup}
-\newcommand{\In}{\bigcap}
-\newcommand{\rond}{\circ}
-\newcommand{\ve}{\overrightarrow}
-\newcommand{\scal}{\cdot}
-\newcommand{\vect}{\wedge}
-\newcommand{\barre}{\overline}
-\newcommand{\pgcd}{\wedge}
-\newcommand{\ppcm}{\vee}
-\newcommand{\non}{\neg}
-\newcommand{\et}{\wedge}
-\newcommand{\ou}{\vee}
+\newcommand{\union}{\cup}
+\newcommand{\disj}{\sqcup}
+\newcommand{\n}{\not}
+\newcommand{\imp}{\op*{\Longrightarrow}}
+\if@french
+    \newcommand{\pt}{\forall}
+    \newcommand{\vide}{\void}
+    \newcommand{\app}{\in}
+    \newcommand{\ssi}{\op*{\Longleftrightarrow}}
+    \newcommand{\dans}{\longrightarrow}
+    \newcommand{\asso}{\longmapsto}
+    \newcommand{\ie}{\op*{\leqslant}}
+    \newcommand{\se}{\op*{\geqslant}}
+    \newcommand{\eq}{\op*{\sim}}
+    \newcommand{\eg}{\op*{=}}
+    \newcommand{\env}{\approx}
+    \newcommand{\co}{\equiv}
+    \newcommand{\fd}{\rightarrow}
+    \newcommand{\fg}{\leftarrow}
+    \newcommand{\lfd}{\longrightarrow}
+    \newcommand{\lfg}{\longleftarrow}
+    \newcommand{\tend}{\op*{\lfd}}
+    \newcommand{\In}{\bigcap}
+    \newcommand{\Un}{\bigcup}
+    \newcommand{\Und}{\bigsqcup}
+    \newcommand{\priv}{\setminus}
+    \newcommand{\rond}{\circ}
+    \newcommand{\barre}{\overline}
+\else
+    \renewcommand{\iff}{\op*{\Longleftrightarrow}}
+\fi
 
-%% Autres
-\newcommand{\croiss}{\nearrow\,}
-\newcommand{\scroiss}{\nearrow\!\!\nearrow\,}
-\newcommand{\decroiss}{\searrow\,}
-\newcommand{\sdecroiss}{\searrow\!\!\searrow\,}
+\if@algebra
+    \newcommand{\K}{\mathbb{K}}
+    \newcommand{\M}{\mathcal{M}}
+    \newcommand{\Li}{\mathcal{L}}
+    \newcommand{\Rel}{\mathcal{R}}
+    \newcommand{\Vect}{\op{Vect}}
+    \newcommand{\Isom}{\op{Isom}}
+    \newcommand{\id}{\op{id}}
+    \newcommand{\rg}{\op{rg}}
+    \newcommand{\tr}{\op{tr}}
+    \newcommand{\Sp}{\op{Sp}}
+    \newcommand{\cl}{\op{cl}}
+    \newcommand{\val}{\op{val}}
+    \newcommand{\pgcd}{\wedge}
+    \newcommand{\ppcm}{\vee}
+    \newcommand{\mat}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+    \newcommand{\matd}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\fi
+
+\if@calculus
+    \newcommand{\Co}{\mathcal{C}}
+    \newcommand{\De}{\mathcal{D}}
+    \newcommand{\Sol}{\mathcal{S}}
+    \newcommand{\asin}{\arcsin}
+    \newcommand{\acos}{\arccos}
+    \newcommand{\atan}{\arctan}
+    \newcommand{\sh}{\op{sh}}
+    \newcommand{\ch}{\op{ch}}
+    \newcommand{\thy}{\op{th}}
+    \newcommand{\sinc}{\op{sinc}}
+    \newcommand{\ash}{\op{argsh}}
+    \newcommand{\ach}{\op{argch}}
+    \newcommand{\ath}{\op{argth}}
+    \newcommand{\erf}{\op{erf}}
+    \newcommand{\de}{\,\mathrm{d}}
+    \newcommand{\dep}{\partial}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorem environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\if@thm
+    \RequirePackage{amsthm}
+    \theoremstyle{definition}
+    \if@french
+        \newtheorem{defi}{Définition}
+        \newtheorem*{defi*}{Définition}
+        \newtheorem{thm}{Théorème}
+        \newtheorem*{thm*}{Théorème}
+        \newtheorem{prop}[thm]{Propriété}
+        \newtheorem*{prop*}{Propriété}
+        \newtheorem{lem}[thm]{Lemme}
+        \newtheorem*{lem*}{Lemme}
+        \newtheorem{crl}[thm]{Corollaire}
+        \newtheorem*{crl*}{Corollaire}
+        \newtheorem*{dem}{Démonstration}
+        \newtheorem{exo}{Exercice}
+        \newtheorem*{exo*}{Exercice}
+        \newtheorem{pb}{Problème}
+        \newtheorem*{pb*}{Problème}
+        \newtheorem*{cor}{Correction}
+    \else
+        \newtheorem{defi}{Definition}
+        \newtheorem*{defi*}{Definition}
+        \newtheorem{thm}{Theorem}
+        \newtheorem*{thm*}{Theorem}
+        \newtheorem{prop}[thm]{Property}
+        \newtheorem*{prop*}{Property}
+        \newtheorem{lem}[thm]{Lemma}
+        \newtheorem*{lem*}{Lemma}
+        \newtheorem{crl}[thm]{Corollary}
+        \newtheorem*{crl*}{Corollary}
+        \newtheorem{exo}{Exercise}
+        \newtheorem*{exo*}{Exercise}
+        \newtheorem{pb}{Problem}
+        \newtheorem*{pb*}{Problem}
+    \fi
+    \newtheorem{qu}{Question}
+    \newtheorem*{sol}{Solution}
+    \theoremstyle{remark}
+    \if@french
+        \newtheorem*{rem}{Remarque}
+        \newtheorem*{exm}{Exemple}
+        \newtheorem*{idee}{Idée}
+    \else
+        \newtheorem*{rem}{Remark}
+        \newtheorem*{exm}{Example}
+    \fi
+\fi
 
 \endinput
