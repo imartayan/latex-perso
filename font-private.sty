@@ -3,11 +3,7 @@
 \ProvidesPackage{font-private}
 
 % Packages
-\@ifpackageloaded{fontspec}{
-	% If fontspec is loaded, don't load mathspec.
-}{
-	\RequirePackage{mathspec}
-}
+\@ifpackageloaded{fontspec}{}{\RequirePackage{mathspec}} % if fontspec is loaded, don't load mathspec
 \defaultfontfeatures{Ligatures=TeX, Numbers={Lining, Proportional}}
 
 % Commands
@@ -45,67 +41,90 @@
 	]
 }
 
-% Options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Complete font family
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Alegreya
 \DeclareOption{alegreya}{
-	\configfontsc[\setmainfont]{Alegreya}{}{ Medium}{ SC}{1}
-	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
+	\configfontsc{Alegreya}{}{ Medium}{ SC}{0.95}
+	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{0.95}
+	\configfontit[\setmonofont]{Inconsolata}{}{}{}{0.95}
 }
 \DeclareOption{alegreya-sans}{
-	\configfontsc[\setmainfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
-	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{1}
+	\configfontsc{Alegreya Sans}{}{ Medium}{ SC}{0.95}
+	\configfontsc[\setsansfont]{Alegreya Sans}{}{ Medium}{ SC}{0.95}
+	\configfontit[\setmonofont]{Inconsolata}{}{}{}{0.95}
 }
-\DeclareOption{anonymous}{
-	\configfont[\setmonofont]{Anonymous Pro}{}{ Bold}{1}
-}
-\DeclareOption{charis}{
-	\configfont[\setmainfont]{Charis SIL}{}{ Bold}{1}
-}
+
+% Fira
 \DeclareOption{fira-sans}{
-	\configfont[\setmainfont]{Fira Sans}{}{ Medium}{0.85}
+	\configfont{Fira Sans}{}{ Medium}{0.85}
 	\configfont[\setsansfont]{Fira Sans}{}{ Medium}{0.85}
 	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
 }
 \DeclareOption{fira-sans-light}{
-	\configfont[\setmainfont]{Fira Sans}{ Light}{}{0.85}
+	\configfont{Fira Sans}{ Light}{}{0.85}
 	\configfont[\setsansfont]{Fira Sans}{ Light}{}{0.85}
 	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
 }
 \DeclareOption{fira-mono}{
 	\configfontit[\setmonofont]{Fira Mono}{}{ Medium}{}{0.85}
 }
-\DeclareOption{inconsolata}{
-	\configfontit[\setmonofont]{Inconsolata}{}{}{}{1}
-}
-\DeclareOption{inria-serif}{
-	\configfont[\setmainfont]{Inria Serif}{}{ Bold}{1}
-	\configfont[\setsansfont]{Inria Sans}{}{ Bold}{1}
-}
-\DeclareOption{inria-sans}{
-	\configfont[\setmainfont]{Inria Sans}{}{ Bold}{1}
-	\configfont[\setsansfont]{Inria Sans}{}{ Bold}{1}
-}
+
+% Source Pro
 \DeclareOption{source-serif}{
-	\configfont[\setmainfont]{Source Serif Pro}{}{ Semibold}{1}
-	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{1}
-	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+	\configfont{Source Serif Pro}{}{ Semibold}{0.9}
+	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{0.9}
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{0.9}
 }
 \DeclareOption{source-sans}{
-	\configfont[\setmainfont]{Source Sans Pro}{}{ Semibold}{1}
-	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{1}
-	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+	\configfont{Source Sans Pro}{}{ Semibold}{0.9}
+	\configfont[\setsansfont]{Source Sans Pro}{}{ Semibold}{0.9}
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{0.9}
 }
 \DeclareOption{source-code}{
-	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{1}
+	\configfont[\setmonofont]{Source Code Pro}{}{ Semibold}{0.9}
 }
 
-% CJK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Serif font only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Brill
+\DeclareOption{brill}{
+	\configfont{Brill}{}{ Bold}{1.05}
+}
+
+% Charis
+\DeclareOption{charis}{
+	\configfont{Charis SIL}{}{ Bold}{0.9}
+}
+
+% Linux Libertine
+\DeclareOption{libertine}{
+	\configfont{Linux Libertine O}{}{ Semibold}{1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mono font only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Inconsolata
+\DeclareOption{inconsolata}{
+	\configfontit[\setmonofont]{Inconsolata}{}{}{}{0.95}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CJK font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% IPA ex Mincho / Gothic
 \DeclareOption{ipaex}{
 	\newfontfamily\rmjap{IPAexMincho}
 	\newfontfamily\sfjap{IPAexGothic}
 }
 
-\ExecuteOptions{alegreya-sans, inconsolata, ipaex}
-% pour respecter l'ordre des options
-\ProcessOptions*\relax
+\ProcessOptions*\relax % respect the given order
 
 \endinput
